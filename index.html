@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Gaza Food System Atlas</title>
+
+
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
+
+</head>
+
+
+<body>
+
+
+  <!-- HERO / OPENING -->
+
+  <header class="hero">
+
+    <p class="eyebrow">
+      Women in Data Datathon 2026
+    </p>
+
+    <h1>
+      Food System Collapse in Gaza
+    </h1>
+
+    <p class="subtitle">
+      From complete siege to the progressive loss of local food-producing capacity.
+    </p>
+
+  </header>
+
+
+
+  <!-- NAVIGATION -->
+
+  <nav class="story-nav">
+
+    <a href="#shock">
+      01 The Shock
+    </a>
+
+    <a href="#hunger">
+      02 Hunger
+    </a>
+
+    <a href="#damage">
+      03 Destruction
+    </a>
+
+    <a href="#interaction">
+      04 Interaction
+    </a>
+
+    <a href="#recovery">
+      05 Recovery
+    </a>
+
+    <a href="#priority">
+      06 Priority
+    </a>
+
+  </nav>
+
+<section class="story-section" id="shock">
+
+  <p class="section-number">
+    01
+  </p>
+
+  <h2>
+    The Shock
+  </h2>
+
+  <p class="section-intro">
+    On 9 October 2023, Israeli authorities announced a “complete siege” of Gaza, sharply restricting the entry of food, fuel, electricity and water.
+  </p>
+
+
+<div class="shock-timeline">
+
+  <div class="timeline-item">
+    <span class="timeline-date">9 Oct 2023</span>
+
+    <h3>“Complete siege” announced</h3>
+
+    <p>
+      Israeli authorities announced a complete siege of Gaza,
+      cutting the supply of food, fuel, electricity and water.
+    </p>
+  </div>
+
+
+  <div class="timeline-item">
+    <span class="timeline-date">Oct 2023</span>
+
+    <h3>Access and supply collapse</h3>
+
+    <p>
+      Commercial and humanitarian inflows fell sharply,
+      disrupting food availability and market access.
+    </p>
+  </div>
+
+
+  <div class="timeline-item">
+    <span class="timeline-date">Nov 2023</span>
+
+    <h3>Food insecurity surges</h3>
+
+    <p>
+      Around 90% of the population was already classified
+      in IPC Phase 3 or worse — Crisis, Emergency or Catastrophe.
+    </p>
+  </div>
+
+</div>
+
+<div class="key-finding">
+
+  <p class="key-label">
+    KEY FINDING
+  </p>
+
+  <p class="key-text">
+    The acute food-security crisis escalated before agricultural destruction reached its later scale, suggesting that access restrictions, supply disruption and market collapse were central to the early shock.
+  </p>
+
+</div>
+
+</section>
+
+<section class="story-section" id="hunger">
+
+  <p class="section-number">
+    02
+  </p>
+
+  <h2>
+    Hunger
+  </h2>
+
+  <p class="section-intro">
+    IPC classifies acute food insecurity from Phase 1 to Phase 5.
+    Higher phases indicate increasingly severe inability to meet basic food needs.
+  </p>
+
+
+  <div class="ipc-legend">
+
+<div class="ipc-phase phase-1">
+  <span>1</span>
+  <p>Minimal</p>
+</div>
+
+<div class="ipc-phase phase-2">
+  <span>2</span>
+  <p>Stressed</p>
+</div>
+
+<div class="ipc-phase phase-3">
+  <span>3</span>
+  <p>Crisis</p>
+</div>
+
+<div class="ipc-phase phase-4">
+  <span>4</span>
+  <p>Emergency</p>
+</div>
+
+<div class="ipc-phase phase-5">
+  <span>5</span>
+  <p>Catastrophe / Famine</p>
+</div>
+ 
+</div>
+
+<div class="hunger-stat">
+
+  <p class="stat-number">
+    90%
+  </p>
+
+  <div class="stat-copy">
+
+    <h3>
+      of the population was already in IPC Phase 3+
+    </h3>
+
+    <p>
+      Crisis, Emergency or Catastrophe — by November 2023,
+      while cropland damage was still far below its later levels.
+    </p>
+
+  </div>
+
+</div>
+
+
+<div class="chart-card">
+
+  <h3>
+    Population in IPC Phase 3+
+  </h3>
+
+  <div id="ipc-chart"></div>
+
+</div>
+
+</section>
+
+<section class="story-section" id="damage">
+
+  <p class="section-number">
+    03
+  </p>
+
+  <h2>
+    Agricultural Destruction
+  </h2>
+
+  <p class="section-intro">
+    Satellite assessments show the progressive loss of cropland,
+    greenhouses and other agricultural infrastructure across Gaza.
+  </p>
+
+  <div class="damage-chart-card">
+
+  <h3>
+    Explore the timeline
+  </h3>
+
+  <svg
+    id="damage-line-chart"
+    viewBox="0 0 900 320"
+    preserveAspectRatio="xMidYMid meet">
+  </svg>
+
+  </div>
+
+    <div class="damage-controls">
+
+  <label for="damage-slider">
+    Cropland damage over time
+  </label>
+
+  <input
+    type="range"
+    id="damage-slider"
+    min="0"
+    max="17"
+    step="1"
+    value="0"
+  >
+
+  <p id="damage-readout">
+    Oct 2023 — 9%
+  </p>
+
+  </div>
+  
+  <div class="map-card">
+
+  <div class="map-legend-box">
+    <div id="map-legend-content"></div>
+  </div>
+
+  <div id="map"></div>
+
+  </div>
+
+  <div class="capacity-block">
+
+  <p class="capacity-label">
+    What agricultural capacity means
+  </p>
+
+  <h3>
+    Damage to farmland is also a loss of food-producing capacity.
+  </h3>
+
+  <div class="capacity-grid">
+
+    <div class="capacity-item">
+      <strong>Fresh vegetables</strong>
+      <span>
+        Greenhouses support local vegetable production.
+      </span>
+    </div>
+
+    <div class="capacity-item">
+      <strong>Local food supply</strong>
+      <span>
+        Farming contributes food directly to local markets and households.
+      </span>
+    </div>
+
+    <div class="capacity-item">
+      <strong>Farmer livelihoods</strong>
+      <span>
+        Damaged fields and greenhouses also mean lost agricultural livelihoods.
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="capacity-proof">
+
+    <strong>1,094 MT</strong>
+
+    <div>
+      <span>
+        fresh vegetables produced
+      </span>
+
+      <p>
+        by 200 supported farming households in the 2025 recovery pilot.
+      </p>
+    </div>
+
+  </div>
+
+  </div>
+
+</section>
+
+<section class="story-section" id="interaction">
+
+  <p class="section-number">
+    04
+  </p>
+
+  <h2>
+    How They Interact
+  </h2>
+
+  <p class="section-intro">
+    Gaza’s food crisis cannot be explained by agricultural destruction alone.
+    Severe food insecurity emerged early, while damage to local food-producing
+    capacity continued to accumulate over time.
+  </p>
+
+  <div class="interaction-card">
+
+  <h3>
+    Food insecurity rose early while agricultural damage kept accumulating
+  </h3>
+
+  <div id="interaction-chart"></div>
+
+  </div>
+
+  <div class="key-finding">
+  <strong>Key finding:</strong>
+  Severe food insecurity was already widespread in late 2023,
+  while agricultural damage continued to deepen over the following
+  months. This suggests that access disruption and the progressive
+  loss of local production capacity were overlapping pressures,
+  rather than a single linear cause.
+  </div>
+
+</section>
+
+<section class="story-section" id="recovery">
+
+  <p class="section-number">
+    05
+  </p>
+
+  <h2>
+    Recovery
+  </h2>
+
+  <p class="section-intro">
+    Recovery is not only about restoring food access.
+    It also requires rebuilding Gaza’s damaged agricultural
+    production capacity and directing limited resources
+    toward the areas with the greatest losses.
+  </p>
+
+  <div class="recovery-funding">
+
+  <div class="funding-head">
+    <span>2026 recovery funding</span>
+    <strong>$2.1M / $72.5M</strong>
+  </div>
+
+  <div class="funding-track">
+    <div class="funding-fill"></div>
+  </div>
+
+  <p class="funding-note">
+    Only 2.9% of the 2026 funding request had been received.
+  </p>
+
+  </div>
+
+  <div class="recovery-pilot">
+
+  <p class="pilot-label">
+    Proof the model can work
+  </p>
+
+  <div class="pilot-stats">
+
+    <div>
+      <strong>200</strong>
+      <span>farming households</span>
+    </div>
+
+    <div>
+      <strong>1,000+</strong>
+      <span>metric tons of vegetables</span>
+    </div>
+
+  </div>
+
+  <p class="pilot-note">
+    A 2025 pilot supporting 200 farming households produced
+    more than 1,000 metric tons of vegetables.
+  </p>
+
+  </div> 
+
+  <div class="recovery-locations">
+
+  <p class="recovery-location-label">
+    Where rehabilitation is happening
+  </p>
+
+  <div class="location-grid">
+
+    <div class="location-card">
+      <strong>Khan Yunis</strong>
+      <span>Current rehabilitation focus</span>
+    </div>
+
+    <div class="location-card">
+      <strong>Deir al-Balah</strong>
+      <span>Current rehabilitation focus</span>
+    </div>
+
+  </div>
+
+  <p class="location-note">
+    As of mid-2026, rehabilitation activity has been concentrated
+    in these two governorates.
+  </p>
+
+  </div>
+
+  <div class="recovery-contrast">
+
+  <p class="recovery-location-label">
+    Recovery focus vs. highest greenhouse destruction
+  </p>
+
+  <div class="contrast-grid">
+
+    <div class="contrast-column">
+      <span class="contrast-heading">
+        Current rehabilitation focus
+      </span>
+
+      <div class="contrast-item">
+        <strong>Khan Yunis</strong>
+        <span>45.4% greenhouse destruction</span>
+      </div>
+
+      <div class="contrast-item">
+        <strong>Deir al-Balah</strong>
+        <span>46.5% greenhouse destruction</span>
+      </div>
+    </div>
+
+
+    <div class="contrast-column">
+      <span class="contrast-heading">
+        Highest recorded destruction
+      </span>
+
+      <div class="contrast-item priority">
+        <strong>North Gaza</strong>
+        <span>86.0% greenhouse destruction</span>
+      </div>
+
+      <div class="contrast-item priority">
+        <strong>Gaza</strong>
+        <span>99.7% greenhouse destruction</span>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="location-note">
+    The most heavily damaged recorded governorates are not currently
+    the main focus of rehabilitation. Recorded site counts differ
+    substantially by governorate, so this comparison should be
+    interpreted with caution.
+  </p>
+
+  </div>  
+
+</section>
+
+<section class="story-section" id="priority">
+
+  <p class="section-number">
+    06
+  </p>
+
+  <h2>
+    Priority Model
+  </h2>
+
+  <p class="section-intro">
+    With recovery funding severely constrained, where should additional
+    agricultural support be prioritized first?
+  </p>
+
+  <div class="priority-method">
+
+  <p class="priority-method-label">
+    How the model works
+  </p>
+
+  <p>
+    Priority is based on two transparent signals:
+    recorded greenhouse destruction and whether a governorate
+    is already a current rehabilitation focus.
+  </p>
+
+  <p class="priority-caution">
+    Assessed site counts are shown separately as a coverage indicator
+    and are not converted into a confidence score.
+  </p>
+
+  </div>
+
+  <div class="priority-card">
+
+  <div class="priority-card-head">
+    <span>Governorate</span>
+    <span>Priority score</span>
+  </div>
+
+  <div id="priority-ranking"></div>
+
+  </div>
+
+  <div class="key-finding">
+
+  <strong>Interpretation:</strong>
+  This ranking is an illustrative decision-support heuristic,
+  not an official or validated allocation model.
+
+  It gives greater weight to recorded greenhouse destruction
+  and adds a smaller penalty where current rehabilitation focus
+  is absent.
+
+  Assessment coverage differs across governorates, so the ranking
+  should be used to guide further review rather than as a final
+  funding decision.
+
+  </div>
+
+</section>
+
+<footer class="site-footer">
+
+  <div class="footer-grid">
+
+    <div>
+      <h3>Sources</h3>
+
+      <p>
+        UNOSAT / FAO satellite-based cropland and greenhouse
+        damage assessments, 2023–2025.
+      </p>
+
+      <p>
+        IPC acute food insecurity assessments for the Gaza Strip.
+      </p>
+
+      <p>
+        FAO agricultural recovery and humanitarian response updates.
+      </p>
+    </div>
+
+
+    <div>
+      <h3>Methodology</h3>
+
+      <p>
+        Cropland damage percentages represent satellite-based
+        estimates of damaged farmland among assessed areas.
+      </p>
+
+      <p>
+        Point-level agricultural assessments are shown only where
+        spatial data are available. Later dates may retain the latest
+        available spatial snapshot for context.
+      </p>
+    </div>
+
+  </div>
+
+  <p class="footer-note">
+    Built for Women in Data Datathon 2026 · Sustain / Eat Track
+  </p>
+
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
