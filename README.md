@@ -1,4 +1,3 @@
-```markdown
 # Gaza Food System Atlas
 
 ### An interactive data atlas exploring food insecurity, agricultural destruction, conflict context, and recovery priorities in the Gaza Strip
@@ -107,12 +106,7 @@ The atlas includes a transparent decision-support heuristic for agricultural reh
 
 The current score is calculated as:
 
-```text
-Priority Score =
-(Recorded Greenhouse Destruction × 0.8)
-+
-20 points if the governorate is not currently identified as a rehabilitation focus
-```
+
 
 Assessed-site counts are displayed separately as an indication of data coverage and are **not** converted into a confidence score.
 
